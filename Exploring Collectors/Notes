@@ -1,0 +1,18 @@
+collect(Collector, Function)
+
+collectingAndThen -> (Collector, Function)
+
+grouping, mapping -> (Function, Collector)
+
+teeing --> (Collector, Collector, Operation)
+
+if you have one to many function, use map to go from
+Stream<T> to Stream<Collection<R>>
+
+if you have one to many function, use flatMap to go from
+Stream<T> to Stream<R>
+
+reduce -> sum, min, max, reduce, collect
+
+
+

@@ -1,0 +1,20 @@
+1. Immutability mean not changing state.
+
+2. In Java, one of the way of achieving this is using Functional Programming
+
+3. Pure functions are very important for Immutability
+    -returns the same result for the same input, no matter how many times you call it.
+    -It has no side-effect to the outside world.
+    Two rules:
+        -Function does not change anything
+        -Function does not depened of anything that may possibly change.
+
+    Eg: Pure function:   sout(3 + 4); // will always result in 7
+        Impure function: a = 3, b = 4;
+                         sout(a + b) // a and b can be changed
+
+4. Stream:
+    -Does not execute a function on a collection of data, instead it executes
+     a collection of function on each piece of data, but only as much as necessary.
+    -Stream functions are lazy, i.e they are not calculated right away. The stream will
+     only be calculated when an end operation is found like forEach(), reduce(), collect(),...

@@ -1,0 +1,14 @@
+1. If you start a parallel stream, but there is sequential() somewhere down the line, then the entire pipeline will be sequential. The priority is from bottom to top.
+2. If you try to perform the terminal operation of a stream in a custom thread pool, then the entire pipeline will be performed in that pool.
+3. First parameter of “reduce” function is an Identity value, not an Initial value, Identity value for + operation is 0, because x + 0 = x; similarly identity value for * will be 1, because x * 1 = x; this matters because adding all elements of a int stream works fine when identity value is set to 0, even in parallel stream, but we change the value to lets say 30, it will give some random result.
+4. Some of the methods can be made sequential even in a parallelStream processing, that doesn’t mean entire pipeline is run sequentially, it just mean whatever is the sequence of the Stream source, eg: if it was List, then that order will be maintained even when multiple threads are working on the pipeline. Eg of such method is forEachOrdered(); remember order is maintained according to the source Collection type of the stream, in case of a Set, off course the order will not be maintained, because Set itself is not ordered.
+5. Even the method “findFirst()”, it will always give the proper answer even in parallelStream. And off course findAny is not ordered.
+6. No of Threads <= No of Cores/ 1 - blocking factor, where 0 <= block factor <= 1
+7. By default parallelStream uses the CommonForkJoinPool.
+8. If the task is Computation heavy, then no of threads should not exceed
+no of cores, it is I/O heavy, then it can exceed.
+9. CommonForkJoinPool shows 1 thread less than total no of cores on the
+machine. Because it is not counting the main thread which is also part of
+the pool.
+10. One of the main advance of ForkJoinPool again ExecutorService is, in the
+latter, a thread breaks a problem into smaller problems and gives it to another threads, and it sits idle which may cause DeadLock and not because of bad code but because how that pool is designed, but in the former there is a WorkStealingAlgorithm, where a Thread never sits idle, and it searches for work and if found does it.

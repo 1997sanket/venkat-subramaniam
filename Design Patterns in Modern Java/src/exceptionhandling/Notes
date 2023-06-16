@@ -1,0 +1,16 @@
+1. So basically, you should really consider going back to imperative style in case of exceptions.
+
+
+2. But if you want to do it functionally, there are currently 3 approaches
+    -using Try, Success, Failure OR write a wrapper method in Streams api. (Stream api only deals with data)
+    -using CompletableFuture (deals with data and error channel and can go back and forth)
+    -using ReactiveProgramming (deals with data, error and complete events, and in case of error the processing is stopped)
+
+
+3. With introduction of Project Loom, it is very likely that developers will go back to imperative style, as it is easier to
+    handle exceptions there and virtual thread concepts will take care of the blocking operations.
+
+
+
+
+random
